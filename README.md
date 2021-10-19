@@ -1,3 +1,12 @@
+# Projeto ADI
+
+Projeto final da disciplina de Aplicações Distribuídas do curso Análise e Desenvolvimento de Sistemas do Instituto Federal de Ciência e Tecnologia de São Paulo - Campus Guarulhos (IFSP)
+
+Alunas:
+
+- Eloisa Silva de Morais - GU3005291
+- Beatriz Biagini Pinto - GU3006301
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
