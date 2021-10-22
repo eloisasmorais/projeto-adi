@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="user")
 public class User implements Serializable {
-    //@Column(name="id"); comentei pq tava dando erro, conversar com o Giovani sobre.
+    @Column(name="id")
     @Id
     private int id;
 

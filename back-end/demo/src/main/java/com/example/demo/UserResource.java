@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//a anotação abaixo basicamente é onde informamos o path, no caso o nosso é users
 @RequestMapping("users")
 public class UserResource {
 
