@@ -1,23 +1,18 @@
-import React from "react";
+import React, { useContext } from 'react';
+import AuthenticatedApp from './app/authenticated-app/views';
+import UnauthenticatedApp from './app/unauthenticated-app';
+import { AuthContext } from './context/AuthContext';
+import AppWrapper from './styles';
+import './styles.css';
 
-function App() {
+const App = () => {
+  const { user } = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppWrapper>
+      {user.token ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+    </AppWrapper>
   );
-}
+};
 
 export default App;
