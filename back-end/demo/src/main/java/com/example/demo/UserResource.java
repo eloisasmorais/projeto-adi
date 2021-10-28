@@ -1,8 +1,14 @@
 package com.example.demo;
 
 import org.springframework.expression.ExpressionException;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -44,6 +50,7 @@ public class UserResource {
                 user.setEmail(updatedUser.getEmail());
                 return repository.save(user);
         }).orElseThrow(()->new Exception());
+
         return returnUser;
     }
 
