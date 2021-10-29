@@ -7,6 +7,8 @@ interface UserModel {
 
 interface AuthContextInterface {
   user: UserModel;
+  logOff: () => void;
+  requestAuthData: () => void;
 }
 
 interface AuthContextProviderProps {
@@ -23,7 +25,17 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     token: null,
   });
 
+  const logOff = () =>
+    setUser({
+      name: null,
+      token: null,
+    });
+
+  const requestAuthData = () => {};
+
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, logOff, requestAuthData }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
