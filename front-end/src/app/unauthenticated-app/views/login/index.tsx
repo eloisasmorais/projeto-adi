@@ -13,9 +13,10 @@ const Login: React.FC = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const codeParam = urlParams.get('code');
 
-      // if (codeParam !== null && codeParam !== '') {
-      //   requestAuthData(codeParam);
-      // }
+      if (codeParam !== null && codeParam !== '') {
+        // requestAuthData(codeParam);
+        console.log(codeParam);
+      }
     };
 
     handleAuth();

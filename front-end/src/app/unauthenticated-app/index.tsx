@@ -5,7 +5,7 @@ import Login from './views/login';
 const UnauthenticatedApp: React.FC = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/login">
+      <Route path="/">
         <Login />
       </Route>
     </Switch>
