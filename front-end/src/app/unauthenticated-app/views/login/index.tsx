@@ -6,21 +6,24 @@ import useAuth from '../../../../hooks/useAuth';
 
 const Login: React.FC = () => {
   const history = useHistory();
-  const { requestAuthData } = useAuth();
-  const url = `https://accounts.spotify.com/authorize?response_type=code&client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`;
+  const { requestAuthData, user } = useAuth();
+  const scopes = encodeURIComponent('user-top-read');
+  const url = `https://accounts.spotify.com/authorize?response_type=code&client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=user-top-read`;
+
   useEffect(() => {
-    const handleAuth = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const codeParam = urlParams.get('code');
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeParam = urlParams.get('code');
 
-      if (codeParam !== null && codeParam !== '') {
-        // requestAuthData(codeParam);
-        console.log(codeParam);
-      }
-    };
+    const handleAuth = async (code: string) => requestAuthData(code);
 
-    handleAuth();
+    if (codeParam !== null && codeParam !== '') {
+      handleAuth(codeParam);
+    }
   }, []);
+
+  // useEffect(() => {
+  //   if (user.token) history.push('/retrospective');
+  // }, [user]);
 
   return (
     <LoginWrapper>
