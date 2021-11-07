@@ -21,6 +21,8 @@ export const AuthContext = createContext({} as AuthContextInterface);
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
+  const ngrok = 'http://3a6c-2804-14c-1a1-27a2-4c1f-6842-2e49-9709.ngrok.io';
+
   const [user, setUser] = useState<UserModel>({
     name: null,
     token: null,
@@ -33,18 +35,15 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     });
 
   const requestAuthData = async (code: string) => {
-    const response = await fetch(
-      'http://f1ad-201-140-244-75.ngrok.io/auth/getResults',
-      {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ code }),
-      }
-    );
+    const response = await fetch(`${ngrok}/auth/getResults`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ code }),
+    });
 
     if (response) {
       const data = await response.json();
@@ -62,18 +61,15 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
   const requestTopItems = async (token: string) => {
     try {
-      const response = await fetch(
-        'http://f1ad-201-140-244-75.ngrok.io/auth/getTopItems',
-        {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        }
-      );
+      const response = await fetch(`${ngrok}/auth/getTopItems`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ token }),
+      });
       // const response = await fetch('https://api.spotify/v1/me/top/artists', {
       //   method: 'GET',
       //   mode: 'cors',

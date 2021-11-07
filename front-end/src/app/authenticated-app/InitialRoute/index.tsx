@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const InitialRoute = () => {
+  const history = useHistory();
   const { user, requestTopItems } = useAuth();
 
   useEffect(() => {
@@ -11,6 +13,10 @@ const InitialRoute = () => {
 
     if (user.token) getTopItems(user.token);
   }, [user]);
+
+  useEffect(() => {
+    history.push('/');
+  }, []);
 
   return (
     <div>
