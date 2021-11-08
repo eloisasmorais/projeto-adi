@@ -6,7 +6,7 @@ import useAuth from '../../../../hooks/useAuth';
 
 const Login: React.FC = () => {
   const history = useHistory();
-  const { requestAuthData, user } = useAuth();
+  const { getLocalStorage, requestAuthData, user } = useAuth();
   const scopes = encodeURIComponent('user-top-read');
   const url = `https://accounts.spotify.com/authorize?response_type=code&client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=user-top-read`;
 
@@ -16,8 +16,12 @@ const Login: React.FC = () => {
 
     const handleAuth = async (code: string) => requestAuthData(code);
 
-    if (codeParam !== null && codeParam !== '') {
-      handleAuth(codeParam);
+    const storage = getLocalStorage();
+
+    if (!storage) {
+      if (codeParam !== null && codeParam !== '') {
+        handleAuth(codeParam);
+      }
     }
   }, []);
 
