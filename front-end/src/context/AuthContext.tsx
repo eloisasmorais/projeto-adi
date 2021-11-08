@@ -7,9 +7,10 @@ interface UserModel {
 
 interface AuthContextInterface {
   user: UserModel;
+  getLocalStorage: () => object | null;
   logOff: () => void;
   requestAuthData: (code: string) => void;
-  requestTopItems: (token: string) => void;
+  requestTopArtists: (token: string) => void;
 }
 
 interface AuthContextProviderProps {
@@ -59,9 +60,9 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     return null;
   };
 
-  const requestTopItems = async (token: string) => {
+  const requestTopArtists = async (token: string) => {
     try {
-      const response = await fetch(`${ngrok}/auth/getTopItems`, {
+      const response = await fetch(`${ngrok}/auth/getTopArtists`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -70,14 +71,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         },
         body: JSON.stringify({ token }),
       });
-      // const response = await fetch('https://api.spotify/v1/me/top/artists', {
-      //   method: 'GET',
-      //   mode: 'cors',
-      //   headers: {
-      //     'Content-type': 'application/json',
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // });
+
       if (response) {
         const data = await response.json();
         return data;
@@ -91,9 +85,27 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     };
   };
 
+  const getLocalStorage = () => {
+    const storage = localStorage.getItem('@Adi/Auth');
+
+    if (storage) {
+      const ls = JSON.parse(storage);
+      setUser({ ...ls, token: ls.access_token });
+      return ls;
+    }
+
+    return null;
+  };
+
   return (
     <AuthContext.Provider
-      value={{ requestTopItems, logOff, requestAuthData, user }}
+      value={{
+        getLocalStorage,
+        requestTopArtists,
+        logOff,
+        requestAuthData,
+        user,
+      }}
     >
       {children}
     </AuthContext.Provider>
