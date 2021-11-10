@@ -60,11 +60,6 @@ const InfoText = styled.p`
     cursor: url(${images.cursor}), pointer; // isso aqui n ta funcioanando n
   }
 `;
-const ListUl = styled.ul`
-  margin: 0;
-  padding: 0;
-  width: 100%;
-`;
 const ListName = styled.p`
   font-size: 20px;
   color: white;
@@ -90,8 +85,9 @@ const Inline = styled.div`
   padding-right: 50px;
   /* border: solid red; */
   min-width: 20%;
-  max-width: 30%;
-  
+  max-width: 40%;
+  /* align-items: center;
+  align-content: center; */
 `;
 
 const AroundList = styled.div`
