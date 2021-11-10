@@ -45,7 +45,7 @@ public class Auth {
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", code)
                 .queryParam("scope", "user-top-read")
-        .queryParam("redirect_uri", "http://localhost:3000");
+        .queryParam("redirect_uri", REACT_APP_REDIRECT_URL);
 
         HttpEntity<?> entity = new HttpEntity<>(headers);
 

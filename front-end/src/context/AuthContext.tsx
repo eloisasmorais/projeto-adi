@@ -10,7 +10,6 @@ interface AuthContextInterface {
   getLocalStorage: () => object | null;
   logOff: () => void;
   requestAuthData: (code: string) => void;
-  requestTopArtists: (token: string) => void;
 }
 
 interface AuthContextProviderProps {
@@ -22,18 +21,24 @@ export const AuthContext = createContext({} as AuthContextInterface);
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
-  const ngrok = 'http://3a6c-2804-14c-1a1-27a2-4c1f-6842-2e49-9709.ngrok.io';
+  const ngrok = 'http://6ebe-2804-14c-1a1-27a2-8557-127e-2600-7598.ngrok.io';
 
   const [user, setUser] = useState<UserModel>({
     name: null,
     token: null,
   });
 
-  const logOff = () =>
+  const logOff = () =>{
+    console.log("aidhoasjd")
     setUser({
       name: null,
       token: null,
     });
+    localStorage.removeItem('@Adi/Auth');
+    console.log("1" + user.token)
+    const storage = localStorage.getItem('@Adi/Auth');
+    console.log('2' +storage)
+  }
 
   const requestAuthData = async (code: string) => {
     const response = await fetch(`${ngrok}/auth/getResults`, {
@@ -60,31 +65,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     return null;
   };
 
-  const requestTopArtists = async (token: string) => {
-    try {
-      const response = await fetch(`${ngrok}/auth/getTopArtists`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ token }),
-      });
-
-      if (response) {
-        const data = await response.json();
-        return data;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    return {
-      error: 500,
-      message: 'internal error',
-    };
-  };
-
+  
   const getLocalStorage = () => {
     const storage = localStorage.getItem('@Adi/Auth');
 
@@ -101,7 +82,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     <AuthContext.Provider
       value={{
         getLocalStorage,
-        requestTopArtists,
         logOff,
         requestAuthData,
         user,
