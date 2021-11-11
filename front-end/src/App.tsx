@@ -10,6 +10,7 @@ const App = () => {
 
   return (
     <AppWrapper>
+      {/* {console.log(user.token)} */}
       {user.token ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </AppWrapper>
   );
