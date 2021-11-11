@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AuthenticatedApp from './app/authenticated-app/views';
 import UnauthenticatedApp from './app/unauthenticated-app';
 import { AuthContext } from './context/AuthContext';
@@ -10,6 +10,7 @@ const App = () => {
 
   return (
     <AppWrapper>
+      {/* {console.log(user.token)} */}
       {user.token ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </AppWrapper>
   );
