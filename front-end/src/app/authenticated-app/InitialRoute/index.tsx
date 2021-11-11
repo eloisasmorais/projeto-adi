@@ -149,7 +149,7 @@ const InitialRoute = () => {
         ) : (
           <>
             <Title>TOP {choice}</Title>
-            <ArtistImage src={currentImage} />
+            <ArtistImage src={currentImage || images.charada} />
             {choice === 'tracks' ? (
               <AroundList>
                 {tracks &&

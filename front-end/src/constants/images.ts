@@ -7,9 +7,11 @@ import spongebob from '../img/spongebob.gif';
 import groot from '../img/groot.gif';
 import chilldad from '../img/chilldad.gif';
 import duck from '../img/duck.gif';
+import charada from '../img/charada.png';
 
 const images = {
   arrows,
+  charada,
   chilldad,
   close,
   cringe,
